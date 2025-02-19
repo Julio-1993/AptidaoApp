@@ -1,4 +1,9 @@
 [app]
+- name: Instalar dependências do Buildozer
+  run: |
+    pip install --upgrade Cython virtualenv
+    pip install --upgrade buildozer
+    buildozer android clean
 
 # (str) Title of your application
 title = Aplicativo de Aptidão
