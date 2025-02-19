@@ -1,9 +1,4 @@
 [app]
-- name: Instalar dependências do Buildozer
-  run: |
-    pip install --upgrade Cython virtualenv
-    pip install --upgrade buildozer
-    buildozer android clean
 
 # (str) Title of your application
 title = Aplicativo de Aptidão
@@ -42,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,https://github.com/kivymd/KivyMD/archive/master.zip, materialyoucolor,exceptiongroup,asyncgui,asynckivy,mysql.connector,pillow, docutils, filetype, Kivy-Garden, pygments, pypiwin32, requests
+requirements = python3,kivy,sqlite3,requests,pillow,pyjnius,plyer,mysql.connector,pillow, docutils, filetype, Kivy-Garden, pygments, pypiwin32, requests
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
