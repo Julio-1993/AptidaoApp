@@ -8,17 +8,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Conceder permissão ao Gradle
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set Android SDK and NDK paths
+        run: |
+          echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y zip unzip openjdk-17-jdk python3-pip
+          python3 -m pip install --upgrade Cython buildozer
+
+      - name: Set permissions for Gradle
         run: chmod +x .buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/AptidaoApp/gradlew || true
 
       - name: Build APK
         uses: digreatbrian/buildozer-action@v2
         with:
           python-version: 3.11
-          buildozer-cmd: buildozer -v android debug
+          buildozer-cmd: |
+            buildozer android clean
+            buildozer -v android debug
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: package
           path: ./bin/*.apk
+
