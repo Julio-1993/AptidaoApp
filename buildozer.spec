@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = kivy == 2.3.1, kivymd, mysql-connector-python == 9.2.0
+requirements = kivy, kivymd, mysql-connector-python
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
