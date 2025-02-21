@@ -7,24 +7,13 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v2
+        with:
+          python-version: 3.8
+          buildozer-cmd: buildozer -v android debug
 
-      - name: Instalar dependências do sistema
-        run: |
-          sudo apt update
-          sudo apt install -y zip unzip openjdk-17-jdk python3-pip libffi-dev libssl-dev
-          python3 -m pip install --upgrade pip
-          pip install --upgrade buildozer cython virtualenv
-
-      - name: Baixar dependências do Buildozer
-        run: buildozer android update
-
-      - name: Corrigir permissões do Gradle (caso necessário)
-        run: chmod +x .buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/AptidaoApp/gradlew || true
-
-      - name: Compilar APK com Buildozer
-        run: buildozer -v android debug
-
-      - name: Upload do APK gerado
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: package
