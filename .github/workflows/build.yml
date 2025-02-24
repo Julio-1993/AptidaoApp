@@ -15,16 +15,19 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install --upgrade buildozer cython virtualenv
 
-      - name: Limpar caches do Buildozer (evita erros)
-        run: rm -rf ~/.buildozer
+      - name: Limpar caches do Buildozer e do Gradle
+        run: |
+          rm -rf ~/.buildozer
+          rm -rf ~/.gradle
+          rm -rf .buildozer/android/platform/build-arm64-v8a_armeabi-v7a
 
-      - name: Baixar dependências do Buildozer
+      - name: Atualizar dependências do Buildozer
         run: buildozer android update
 
       - name: Corrigir permissões do Gradle
         run: chmod +x .buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/AptidaoApp/gradlew || true
 
-      - name: Compilar APK com Buildozer
+      - name: Criar APK com Buildozer
         run: buildozer -v android debug
 
       - name: Upload do APK gerado
@@ -32,3 +35,4 @@ jobs:
         with:
           name: package
           path: ./bin/*.apk
+
