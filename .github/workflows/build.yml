@@ -8,31 +8,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Instalar dependências do sistema
-        run: |
-          sudo apt update
-          sudo apt install -y zip unzip openjdk-17-jdk python3-pip libffi-dev libssl-dev
-          python3 -m pip install --upgrade pip
-          pip install --upgrade buildozer cython virtualenv
+      - name: Configurar Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Limpar caches do Buildozer e do Gradle
-        run: |
-          rm -rf ~/.buildozer
-          rm -rf ~/.gradle
-          rm -rf .buildozer/android/platform/build-arm64-v8a_armeabi-v7a
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v2
+        with:
+          python-version: 3.11
+          buildozer-cmd: buildozer -v android debug
 
-      - name: Atualizar dependências do Buildozer
-        run: buildozer android update
-
-      - name: Corrigir permissões do Gradle
-        run: chmod +x .buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/AptidaoApp/gradlew || true
-
-      - name: Criar APK com Buildozer
-        run: buildozer -v android debug
-
-      - name: Upload do APK gerado
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: package
           path: ./bin/*.apk
-
