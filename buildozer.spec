@@ -7,7 +7,7 @@ title = Aplicativo de Aptidão
 package.name = AptidaoApp
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.Julio-1993
+package.domain = org.Julio_1993
 
 # (str) Source code where the main.py live
 source.dir = .
