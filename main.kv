@@ -1,19 +1,72 @@
-#: include app/screens/menuscreen/menuscreen.kv
-#: include app/screens/proteinscreen/proteinscreen.kv
-#: include app/components/proteinanalysis/proteinanalysis.kv
-#: include app/customwidgets/customwidgets.kv
-#: include app/customwidgets/custompopups.kv
-#: include app/customwidgets/customlabels/customlabels.kv
-#: include app/customwidgets/custombuttons/custombuttons.kv
-#: include app/customwidgets/customlayouts/customlayouts.kv
+<AptidaoApp>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
 
-ScreenManager:
-    id: screen_manager
+    Label:
+        text: 'CIIC do Animal:'
     
-    MenuScreen:
-        name: 'menu_screen'
-        id: menu_screen
+    TextInput:
+        id: ciic_input
+        multiline: False
+        on_text: root.buscar_nome(self, self.text)
+
+    Label:
+        text: 'Nome do Animal:'
     
-    ProteinScreen:
-        name: 'protein_screen'
-        id: protein_screen
+    TextInput:
+        id: nome_input
+        multiline: False
+        readonly: True
+
+    Label:
+        text: 'Tipo de Aptidão:'
+
+    Spinner:
+        id: tipo_aptidao
+        text: 'Selecione'
+        values: ['Adoção', 'Reintegração']
+
+    Label:
+        text: 'Status de Aptidão:'
+    
+    BoxLayout:
+        CheckBox:
+            id: status_apto
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: 'Apto'
+
+        CheckBox:
+            id: status_inapto
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: 'Inapto'
+
+        CheckBox:
+            id: status_apto_especial
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: 'Apto-Especial'
+
+        CheckBox:
+            id: status_controle
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: 'Controle de Espécie'
+
+    Label:
+        text: 'Motivos Aptidão:'
+
+    ScrollView:
+        size_hint: (1, None)
+        height: 150
+        TextInput:
+            id: motivos_input
+            size_hint_y: None
+            height: 150
+            multiline: True
+
+    Button:
+        text: 'Salvar'
+        on_press: root.salvar_dados(self)
