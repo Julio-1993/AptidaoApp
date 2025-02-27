@@ -10,7 +10,7 @@
             size: self.size
             pos: self.pos
 
-    Label:
+     Label:
         text: "CIIC:"
         color: 0, 0, 0, 1
     TextInput:
@@ -44,37 +44,65 @@
     GridLayout:
         cols: 2  # Duas colunas
         rows: 2  # Duas linhas
-        spacing: 5
+        spacing: 10
         size_hint_y: None
         height: "100dp"
 
         BoxLayout:
+            size_hint_x: None
+            width: "150dp"
             CheckBox:
                 id: status_apto
+                on_active: root.deselecionar_outros(self)
             Label:
                 text: "Apto"
                 color: 0, 0, 0, 1
+                size_hint_x: None
+                width: "100dp"
+                halign: "left"
+                valign: "middle"
 
         BoxLayout:
+            size_hint_x: None
+            width: "150dp"
             CheckBox:
                 id: status_inapto
+                on_active: root.deselecionar_outros(self)
             Label:
                 text: "Inapto"
                 color: 0, 0, 0, 1
+                size_hint_x: None
+                width: "100dp"
+                halign: "left"
+                valign: "middle"
 
         BoxLayout:
+            size_hint_x: None
+            width: "150dp"
             CheckBox:
                 id: status_apto_especial
+                on_active: root.deselecionar_outros(self)
             Label:
                 text: "Apto-Especial"
                 color: 0, 0, 0, 1
+                size_hint_x: None
+                width: "100dp"
+                halign: "left"
+                valign: "middle"
 
         BoxLayout:
+            size_hint_x: None
+            width: "150dp"
             CheckBox:
                 id: status_controle
+                on_active: root.deselecionar_outros(self)
             Label:
                 text: "Controle de Espécie"
                 color: 0, 0, 0, 1
+                size_hint_x: None
+                width: "120dp"
+                halign: "left"
+                valign: "middle"
 
     Label:
         text: "Motivos Aptidão:"
@@ -82,7 +110,7 @@
 
     ScrollView:
         size_hint: (1, None)
-        height: "200dp"  # Aumentando a altura do campo de texto
+        height: "200dp"
         TextInput:
             id: motivos_input
             size_hint_y: None
