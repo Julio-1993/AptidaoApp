@@ -3,9 +3,17 @@
     padding: 10
     spacing: 10
 
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.6, 0.9, 1  # Azul claro
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
     Label:
         text: 'CIIC do Animal:'
-    
+        color: 0, 0, 0, 1
+
     TextInput:
         id: ciic_input
         multiline: False
@@ -13,7 +21,8 @@
 
     Label:
         text: 'Nome do Animal:'
-    
+        color: 0, 0, 0, 1
+
     TextInput:
         id: nome_input
         multiline: False
@@ -21,6 +30,7 @@
 
     Label:
         text: 'Tipo de Aptidão:'
+        color: 0, 0, 0, 1
 
     Spinner:
         id: tipo_aptidao
@@ -29,34 +39,43 @@
 
     Label:
         text: 'Status de Aptidão:'
-    
+        color: 0, 0, 0, 1
+
     BoxLayout:
+        id: status_layout
+        spacing: 5
+
         CheckBox:
             id: status_apto
             on_active: root.deselecionar_outros(self, self.active)
         Label:
             text: 'Apto'
+            color: 0, 0, 0, 1
 
         CheckBox:
             id: status_inapto
             on_active: root.deselecionar_outros(self, self.active)
         Label:
             text: 'Inapto'
+            color: 0, 0, 0, 1
 
         CheckBox:
             id: status_apto_especial
             on_active: root.deselecionar_outros(self, self.active)
         Label:
             text: 'Apto-Especial'
+            color: 0, 0, 0, 1
 
         CheckBox:
             id: status_controle
             on_active: root.deselecionar_outros(self, self.active)
         Label:
             text: 'Controle de Espécie'
+            color: 0, 0, 0, 1
 
     Label:
         text: 'Motivos Aptidão:'
+        color: 0, 0, 0, 1
 
     ScrollView:
         size_hint: (1, None)
@@ -70,3 +89,4 @@
     Button:
         text: 'Salvar'
         on_press: root.salvar_dados(self)
+
