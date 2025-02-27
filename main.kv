@@ -11,82 +11,84 @@
             pos: self.pos
 
     Label:
-        text: 'CIIC do Animal:'
+        text: "CIIC:"
         color: 0, 0, 0, 1
-
     TextInput:
         id: ciic_input
         multiline: False
-        on_text: root.buscar_nome(self, self.text)
+        size_hint_y: None
+        height: "40dp"
 
     Label:
-        text: 'Nome do Animal:'
+        text: "Nome do Animal:"
         color: 0, 0, 0, 1
-
     TextInput:
         id: nome_input
         multiline: False
         readonly: True
+        size_hint_y: None
+        height: "40dp"
 
     Label:
-        text: 'Tipo de Aptidão:'
+        text: "Tipo de Aptidão:"
         color: 0, 0, 0, 1
-
     Spinner:
         id: tipo_aptidao
-        text: 'Selecione'
-        values: ['Adoção', 'Reintegração']
+        text: "Selecione"
+        values: ["Adoção", "Reintegração"]
 
     Label:
-        text: 'Status de Aptidão:'
+        text: "Status de Aptidão:"
         color: 0, 0, 0, 1
 
-    BoxLayout:
-        id: status_layout
+    GridLayout:
+        cols: 2  # Duas colunas
+        rows: 2  # Duas linhas
         spacing: 5
+        size_hint_y: None
+        height: "100dp"
 
-        CheckBox:
-            id: status_apto
-            on_active: root.deselecionar_outros(self, self.active)
-        Label:
-            text: 'Apto'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            CheckBox:
+                id: status_apto
+            Label:
+                text: "Apto"
+                color: 0, 0, 0, 1
 
-        CheckBox:
-            id: status_inapto
-            on_active: root.deselecionar_outros(self, self.active)
-        Label:
-            text: 'Inapto'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            CheckBox:
+                id: status_inapto
+            Label:
+                text: "Inapto"
+                color: 0, 0, 0, 1
 
-        CheckBox:
-            id: status_apto_especial
-            on_active: root.deselecionar_outros(self, self.active)
-        Label:
-            text: 'Apto-Especial'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            CheckBox:
+                id: status_apto_especial
+            Label:
+                text: "Apto-Especial"
+                color: 0, 0, 0, 1
 
-        CheckBox:
-            id: status_controle
-            on_active: root.deselecionar_outros(self, self.active)
-        Label:
-            text: 'Controle de Espécie'
-            color: 0, 0, 0, 1
+        BoxLayout:
+            CheckBox:
+                id: status_controle
+            Label:
+                text: "Controle de Espécie"
+                color: 0, 0, 0, 1
 
     Label:
-        text: 'Motivos Aptidão:'
+        text: "Motivos Aptidão:"
         color: 0, 0, 0, 1
 
     ScrollView:
         size_hint: (1, None)
-        height: 150
+        height: "200dp"  # Aumentando a altura do campo de texto
         TextInput:
             id: motivos_input
             size_hint_y: None
-            height: 150
+            height: "200dp"
             multiline: True
 
     Button:
-        text: 'Salvar'
-        on_press: root.salvar_dados(self)
-
+        text: "Salvar"
+        on_press: root.salvar_dados()
