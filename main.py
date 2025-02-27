@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-import mysql.connector
+import pymysql
 import os
 
 # Carregar o arquivo KV
@@ -27,13 +27,13 @@ class AptidaoApp(BoxLayout):
 
     def conectar_banco(self):
         try:
-            return mysql.connector.connect(
+            return pymysql.connect(
                 host="186.202.152.111",
                 user="consorciofauna",
                 password="cgF@1234",
                 database="consorciofauna"
             )
-        except mysql.connector.Error as erro:
+        except pymysql.connect.Error as erro:
             print(f"Erro ao conectar ao banco: {erro}")
             return None
 
@@ -45,7 +45,7 @@ class AptidaoApp(BoxLayout):
                 cursor.execute("SELECT nome FROM f_animal WHERE ciic = %s", (ciic,))
                 resultado = cursor.fetchone()
                 return resultado[0] if resultado else None
-            except mysql.connector.Error as erro:
+            except pymysql.connect.Error as erro:
                 print(f"Erro ao buscar o nome: {erro}")
             finally:
                 cursor.close()
@@ -85,7 +85,7 @@ class AptidaoApp(BoxLayout):
                 conexao.commit()
                 print("Dados salvos com sucesso!")
                 self.limpar_campos()
-            except mysql.connector.Error as erro:
+            except pymysql.connect.Error as erro:
                 print(f"Erro ao salvar os dados: {erro}")
             finally:
                 cursor.close()
