@@ -1,8 +1,8 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-import os
 import mysql.connector
+import os
 
 # Carregar o arquivo KV
 Builder.load_file(os.path.join(os.path.dirname(__file__), "main.kv"))
@@ -11,10 +11,7 @@ class AptidaoApp(BoxLayout):
     def buscar_nome(self, instance, value):
         if value:
             nome = self.consultar_nome_banco(value)
-            if nome:
-                self.ids.nome_input.text = nome
-            else:
-                self.ids.nome_input.text = ""
+            self.ids.nome_input.text = nome if nome else ""
 
     def deselecionar_outros(self, instance, value):
         if value:
@@ -39,13 +36,13 @@ class AptidaoApp(BoxLayout):
         except mysql.connector.Error as erro:
             print(f"Erro ao conectar ao banco: {erro}")
             return None
-    
+
     def consultar_nome_banco(self, ciic):
         conexao = self.conectar_banco()
         if conexao:
             try:
                 cursor = conexao.cursor()
-                cursor.execute("SELECT nome FROM animais WHERE ciic = %s", (ciic,))
+                cursor.execute("SELECT nome FROM f_animal WHERE ciic = %s", (ciic,))
                 resultado = cursor.fetchone()
                 return resultado[0] if resultado else None
             except mysql.connector.Error as erro:
