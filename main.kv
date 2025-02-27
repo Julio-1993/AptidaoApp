@@ -10,12 +10,13 @@
             size: self.size
             pos: self.pos
 
-     Label:
+    Label:
         text: "CIIC:"
         color: 0, 0, 0, 1
     TextInput:
         id: ciic_input
         multiline: False
+        on_text: root.buscar_nome(self, self.text)
         size_hint_y: None
         height: "40dp"
 
