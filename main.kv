@@ -16,7 +16,7 @@
     TextInput:
         id: ciic_input
         multiline: False
-        on_text: root.buscar_nome(self, self.text)
+        on_text: self.text.upper(); root.buscar_nome(self, self.text)
         size_hint_y: None
         height: "40dp"
 
