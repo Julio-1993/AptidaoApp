@@ -4,11 +4,26 @@ from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.clock import Clock
+from kivy.uix.checkbox import CheckBox
+from kivy.graphics import Color, Rectangle
 import pymysql
 import os
 
 # Carregar o arquivo KV
 Builder.load_file(os.path.join(os.path.dirname(__file__), "main.kv"))
+
+class CustomCheckBox(CheckBox):
+    def on_kv_post(self, base_widget):
+        """Define a cor de fundo da checkbox após ser carregada no KV."""
+        with self.canvas.before:
+            Color(0.6, 0.6, 0.6, 1)  # Cinza
+            self.rect = Rectangle(size=self.size, pos=self.pos)
+        self.bind(size=self.update_rect, pos=self.update_rect)
+
+    def update_rect(self, *args):
+        """Mantém o fundo cinza ajustado ao tamanho da CheckBox."""
+        self.rect.size = self.size
+        self.rect.pos = self.pos
 
 class AptidaoApp(BoxLayout):
     def buscar_nome(self, instance, value):
