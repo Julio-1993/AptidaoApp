@@ -64,7 +64,7 @@ class AptidaoApp(BoxLayout):
                 conexao.close()
         return None
 
-    def salvar_dados(self):
+    def salvar_dados(self, instance):
         """Salva os dados no banco de dados."""
         ciic_animal = self.ids.ciic_input.text
         nome_animal = self.ids.nome_input.text
