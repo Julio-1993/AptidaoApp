@@ -12,7 +12,8 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), "main.kv"))
 
 class AptidaoApp(BoxLayout):
     def buscar_nome(self, instance, value):
-        """Busca o nome do animal pelo CIIC e atualiza o campo."""
+        value = value.upper()  # Garante que o valor seja maiúsculo
+        self.ids.ciic_input.text = value
         if value:
             nome = self.consultar_nome_banco(value)
             self.ids.nome_input.text = nome if nome else ""
