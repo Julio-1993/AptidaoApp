@@ -55,8 +55,12 @@
             CheckBox:
                 id: status_apto
                 on_active: root.deselecionar_outros(self, self.active)
-                background_checkbox_normal: 'atlas://data/images/defaulttheme/checkbox_off'
-                background_checkbox_down: 'atlas://data/images/defaulttheme/checkbox_on'
+            canvas.before:
+                Color:
+                    rgba: 0.6, 0.6, 0.6, 1  # Cor cinza
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: "Apto"
                 color: 0, 0, 0, 1
@@ -71,8 +75,12 @@
             CheckBox:
                 id: status_inapto
                 on_active: root.deselecionar_outros(self, self.active)
-                background_checkbox_normal: 'atlas://data/images/defaulttheme/checkbox_off'
-                background_checkbox_down: 'atlas://data/images/defaulttheme/checkbox_on'
+                canvas.before:
+                Color:
+                    rgba: 0.6, 0.6, 0.6, 1  # Cor cinza
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: "Inapto"
                 color: 0, 0, 0, 1
@@ -87,8 +95,12 @@
             CheckBox:
                 id: status_apto_especial
                 on_active: root.deselecionar_outros(self, self.active)
-                background_checkbox_normal: 'atlas://data/images/defaulttheme/checkbox_off'
-                background_checkbox_down: 'atlas://data/images/defaulttheme/checkbox_on'
+                canvas.before:
+                Color:
+                    rgba: 0.6, 0.6, 0.6, 1  # Cor cinza
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: "Apto-Especial"
                 color: 0, 0, 0, 1
@@ -103,8 +115,12 @@
             CheckBox:
                 id: status_controle
                 on_active: root.deselecionar_outros(self, self.active)
-                background_checkbox_normal: 'atlas://data/images/defaulttheme/checkbox_off'
-                background_checkbox_down: 'atlas://data/images/defaulttheme/checkbox_on'
+                canvas.before:
+                Color:
+                    rgba: 0.6, 0.6, 0.6, 1  # Cor cinza
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
             Label:
                 text: "Controle de Espécie"
                 color: 0, 0, 0, 1
