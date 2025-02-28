@@ -1,6 +1,7 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
+from kivy.uix.popup import Popup
 import pymysql
 import os
 
@@ -33,8 +34,8 @@ class AptidaoApp(BoxLayout):
                 password="cgF@1234",
                 database="consorciofauna"
             )
-        except pymysql.connect.Error as erro:
-            print(f"Erro ao conectar ao banco: {erro}")
+        except pymysql.MySQLError as erro:  # Corrigido para MySQLError
+            self.mostrar_popup("Erro", f"Erro ao conectar ao banco:\n{erro}")
             return None
 
     def consultar_nome_banco(self, ciic):
@@ -45,14 +46,14 @@ class AptidaoApp(BoxLayout):
                 cursor.execute("SELECT nome FROM f_animal WHERE ciic = %s", (ciic,))
                 resultado = cursor.fetchone()
                 return resultado[0] if resultado else None
-            except pymysql.connect.Error as erro:
-                print(f"Erro ao buscar o nome: {erro}")
+            except pymysql.MySQLError as erro:
+                self.mostrar_popup("Erro", f"Erro ao buscar o nome:\n{erro}")
             finally:
                 cursor.close()
                 conexao.close()
         return None
 
-    def salvar_dados(self, instance):
+    def salvar_dados(self):
         ciic_animal = self.ids.ciic_input.text
         nome_animal = self.ids.nome_input.text
         taptidao = self.ids.tipo_aptidao.text
@@ -69,7 +70,7 @@ class AptidaoApp(BoxLayout):
 
         motivos = self.ids.motivos_input.text
         if not ciic_animal or not nome_animal or not motivos:
-            print("Todos os campos devem ser preenchidos!")
+            self.mostrar_popup("Atenção", "Todos os campos devem ser preenchidos!")
             return
 
         conexao = self.conectar_banco()
@@ -83,13 +84,23 @@ class AptidaoApp(BoxLayout):
                 valores = (ciic_animal, nome_animal, taptidao, status, motivos)
                 cursor.execute(sql, valores)
                 conexao.commit()
-                print("Dados salvos com sucesso!")
+                self.mostrar_popup("Sucesso", "Dados salvos com sucesso!")
                 self.limpar_campos()
-            except pymysql.connect.Error as erro:
-                print(f"Erro ao salvar os dados: {erro}")
+            except pymysql.MySQLError as erro:
+                self.mostrar_popup("Erro", f"Erro ao salvar os dados:\n{erro}")
             finally:
                 cursor.close()
                 conexao.close()
+
+    def mostrar_popup(self, titulo, mensagem):
+        """Exibe um popup na tela com uma mensagem."""
+        popup = Popup(
+            title=titulo,
+            content=Label(text=mensagem),
+            size_hint=(None, None),
+            size=(400, 200)
+        )
+        popup.open()
 
     def limpar_campos(self):
         self.ids.ciic_input.text = ""
