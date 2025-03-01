@@ -49,37 +49,53 @@
         size_hint_y: None
         height: "100dp"
 
-    CustomCheckBox:
-        id: status_apto
-        on_active: root.deselecionar_outros(self)
+    BoxLayout:
+        size_hint_x: None
+        width: "150dp"
+        CustomCheckBox:
+            id: status_apto
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: "Apto"
+            color: 0, 0, 0, 1
+            size_hint_x: None
+            width: "100dp"
 
-    Label:
-        text: "Apto"
-        color: 0, 0, 0, 1
+    BoxLayout:
+        size_hint_x: None
+        width: "150dp"
+        CustomCheckBox:
+            id: status_inapto
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: "Inapto"
+            color: 0, 0, 0, 1
+            size_hint_x: None
+            width: "100dp"
 
-    CustomCheckBox:
-        id: status_inapto
-        on_active: root.deselecionar_outros(self)
+    BoxLayout:
+        size_hint_x: None
+        width: "150dp"
+        CustomCheckBox:
+            id: status_apto_especial
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: "Apto-Especial"
+            color: 0, 0, 0, 1
+            size_hint_x: None
+            width: "100dp"
 
-    Label:
-        text: "Inapto"
-        color: 0, 0, 0, 1
-
-    CustomCheckBox:
-        id: status_apto_especial
-        on_active: root.deselecionar_outros(self)
-
-    Label:
-        text: "Apto-Especial"
-        color: 0, 0, 0, 1
-
-    CustomCheckBox:
-        id: status_apto_especial
-        on_active: root.deselecionar_outros(self)
-
-    Label:
-        text: "Controle de espécie"
-        color: 0, 0, 0, 1
+    BoxLayout:
+        size_hint_x: None
+        width: "150dp"
+        CustomCheckBox:
+            id: status_controle
+            on_active: root.deselecionar_outros(self, self.active)
+        Label:
+            text: "Controle de espécie"
+            color: 0, 0, 0, 1
+            size_hint_x: None
+            width: "100dp"
 
     Label:
         text: "Motivos Aptidão:"
