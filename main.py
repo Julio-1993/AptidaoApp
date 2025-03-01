@@ -15,8 +15,9 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), "main.kv"))
 class CustomCheckBox(CheckBox):
     def on_kv_post(self, base_widget):
         """Define a cor de fundo da checkbox após ser carregada no KV."""
+        super().on_kv_post(base_widget)  # Garante que a classe base seja inicializada
         with self.canvas.before:
-            Color(0.6, 0.6, 0.6, 1)  # Cinza
+            self.color_rect = Color(0.6, 0.6, 0.6, 1)  # Cor cinza
             self.rect = Rectangle(size=self.size, pos=self.pos)
         self.bind(size=self.update_rect, pos=self.update_rect)
 
